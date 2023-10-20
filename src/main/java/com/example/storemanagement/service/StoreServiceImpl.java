@@ -2,21 +2,13 @@ package com.example.storemanagement.service;
 
 import com.example.storemanagement.entity.Store;
 import com.example.storemanagement.repository.dto.StoreDto;
+import com.example.storemanagement.repository.dto.StoreFilter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class StoreServiceImpl implements StoreService{
-    @Override
-    public Store searchById(Long id) {
-        return null;
-    }
-
-    @Override
-    public Store searchByName(String name) {
-        return null;
-    }
 
     @Override
     public Store create(StoreDto storeDto) {
@@ -24,7 +16,12 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public List<Store> create(List<StoreDto> storeDto) {
+    public Store searchById(Long id) {
+        return null;
+    }
+
+    @Override
+    public Store search(StoreFilter storeFilter) {
         return null;
     }
 
