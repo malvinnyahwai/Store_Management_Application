@@ -43,7 +43,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item update(ItemDto itemDto) {
+    public Item update(ItemDto itemDto, Long id) {
         return null;
     }
 

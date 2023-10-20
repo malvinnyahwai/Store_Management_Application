@@ -35,12 +35,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category search(CategoryFilter categoryFilter) {
+    public List<Category> search(CategoryFilter categoryFilter) {
         return null;
     }
 
     @Override
-    public Category update(CategoryDto categoryDto) {
+    public Category update(CategoryDto categoryDto, Long id) {
         return null;
     }
 

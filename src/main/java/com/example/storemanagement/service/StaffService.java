@@ -10,6 +10,6 @@ public interface StaffService {
     Staff create(StaffDto staffDto);
     Staff searchById(Long id);
     List<Staff> search(StaffFilter filter);
-    Staff update(StaffDto staffDto);
+    Staff update(StaffDto staffDto, Long id);
     void delete(Long id);
 }

@@ -10,6 +10,6 @@ public interface ItemService {
     Item create(ItemDto itemDto);
     Item searchById(Long id);
     List<Item> search(ItemFilter itemFilter);
-    Item update(ItemDto itemDto);
+    Item update(ItemDto itemDto, Long id);
     void delete(Long id);
 }

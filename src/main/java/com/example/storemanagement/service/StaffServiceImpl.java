@@ -40,7 +40,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Staff update(StaffDto staffDto) {
+    public Staff update(StaffDto staffDto, Long id) {
         return null;
     }
 
