@@ -36,12 +36,25 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public List<Staff> search(StaffFilter filter) {
-        return null;
+        if(filter.getIdNumber()!=null) {
+            return staffRepository.findAllByIdNumber(filter.getIdNumber());
+        } else {
+            throw new EntityNotFoundException("Staff not found...");
+        }
     }
 
     @Override
     public Staff update(StaffDto staffDto, Long id) {
-        return null;
+        Staff staff = searchById(id);
+        staff.setFirstName(staffDto.getFirstName());
+        staff.setLastName(staffDto.getLastName());
+        staff.setIdNumber(staffDto.getIdNumber());
+        staff.setDatOfBirth(staffDto.getDatOfBirth());
+        staff.setAddress(staffDto.getAddress());
+        Store store = storeService.searchById(staffDto.getStoreId());
+        staff.setStore(store);
+        staff.setActive(true);
+        return staffRepository.save(staff);
     }
 
     @Override

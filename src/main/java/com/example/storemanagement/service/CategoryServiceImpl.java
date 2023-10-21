@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -36,12 +37,20 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> search(CategoryFilter categoryFilter) {
-        return null;
+        if(!categoryFilter.getName().isEmpty()) {
+            return categoryRepository.findAllByName(categoryFilter.getName());
+        } else {
+            throw new EntityNotFoundException("Category not found...");
+        }
     }
 
     @Override
     public Category update(CategoryDto categoryDto, Long id) {
-        return null;
+        Category category = searchById(id);
+        category.setName(category.getName());
+        List<Item> items = categoryDto.getItemIds().stream().map(itemService::searchById).collect(Collectors.toList());
+        category.setItem(items);
+        return categoryRepository.save(category);
     }
 
     @Override

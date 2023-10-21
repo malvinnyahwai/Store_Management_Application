@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StoreServiceImpl implements StoreService{
@@ -38,12 +39,22 @@ public class StoreServiceImpl implements StoreService{
 
     @Override
     public Store search(StoreFilter storeFilter) {
-        return null;
+        if(storeFilter.getName()!=null) {
+            return storeRepository.findByName(storeFilter.getName());
+        } else {
+            throw new EntityNotFoundException("Store not found...");
+        }
     }
 
     @Override
-    public Store update(StoreDto storeDto) {
-        return null;
+    public Store update(StoreDto storeDto, Long id) {
+        Store store = searchById(id);
+        store.setName(storeDto.getName());
+        store.setAddress(storeDto.getAddress());
+        store.setActive(true);
+        List<Staff> staff = storeDto.getStaffIds().stream().map(staffService::searchById).collect(Collectors.toList());
+        store.setStaff(staff);
+        return storeRepository.save(store);
     }
 
     @Override

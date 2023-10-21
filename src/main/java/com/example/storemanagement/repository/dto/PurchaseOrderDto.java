@@ -1,8 +1,5 @@
 package com.example.storemanagement.repository.dto;
 
-import com.example.storemanagement.entity.Item;
-import com.example.storemanagement.entity.Staff;
-import com.example.storemanagement.entity.Store;
 import com.sun.istack.NotNull;
 
 import java.util.List;

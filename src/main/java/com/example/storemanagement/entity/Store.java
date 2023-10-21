@@ -6,6 +6,7 @@ import java.util.List;
 @Entity
 public class Store {
     @Id
+    @GeneratedValue
     private Long id;
     @Column(nullable = false, unique = true)
     private String name;

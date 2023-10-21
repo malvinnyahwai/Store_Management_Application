@@ -10,6 +10,6 @@ public interface StoreService {
     Store create(StoreDto storeDto);
     Store searchById(Long id);
     Store search(StoreFilter storeFilter);
-    Store update(StoreDto storeDto);
+    Store update(StoreDto storeDto, Long id);
     void delete(Long id);
 }

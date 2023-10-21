@@ -6,6 +6,7 @@ import java.util.Date;
 @Entity
 public class Item {
     @Id
+    @GeneratedValue
     private Long id;
     @Column(nullable = false)
     private String name;

@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 public class PurchaseOrder {
     @Id
+    @GeneratedValue
     private Long id;
     @Column(name = "creation_date")
     private Date createdDate;

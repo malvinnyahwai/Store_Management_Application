@@ -1,17 +1,16 @@
 package com.example.storemanagement.service;
 
-import com.example.storemanagement.entity.Item;
-import com.example.storemanagement.entity.PurchaseOrder;
-import com.example.storemanagement.entity.Staff;
-import com.example.storemanagement.entity.Store;
+import com.example.storemanagement.entity.*;
 import com.example.storemanagement.repository.PurchaseOrderRepository;
 import com.example.storemanagement.repository.dto.ItemFilter;
 import com.example.storemanagement.repository.dto.PurchaseOrderDto;
 import com.example.storemanagement.repository.dto.PurchaseOrderFilter;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.LocalDate;
+import javax.persistence.criteria.Predicate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +47,29 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public List<PurchaseOrder> search(PurchaseOrderFilter purchaseOrderFilter) {
-        return null;
+
+
+        Specification<PurchaseOrder> spec = (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (purchaseOrderFilter.getCreatedDate() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("createdDate"), purchaseOrderFilter.getCreatedDate()));
+            }
+
+            if (purchaseOrderFilter.getStaffId() != null) {
+                Staff staff = staffService.searchById(purchaseOrderFilter.getStaffId());
+                predicates.add(criteriaBuilder.equal(root.get("createdBy"), staff));
+            }
+
+            if (purchaseOrderFilter.getStoreId() != null) {
+                Store store = storeService.searchById(purchaseOrderFilter.getStoreId());
+                predicates.add(criteriaBuilder.equal(root.get("store"), store));
+            }
+
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
+
+        return purchaseOrderRepository.findAll(spec);
     }
 
     @Override
