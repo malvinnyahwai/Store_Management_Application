@@ -1,8 +1,10 @@
 package com.example.storemanagement.service;
 
-import com.example.storemanagement.entity.*;
+import com.example.storemanagement.entity.Item;
+import com.example.storemanagement.entity.PurchaseOrder;
+import com.example.storemanagement.entity.Staff;
+import com.example.storemanagement.entity.Store;
 import com.example.storemanagement.repository.PurchaseOrderRepository;
-import com.example.storemanagement.repository.dto.ItemFilter;
 import com.example.storemanagement.repository.dto.PurchaseOrderDto;
 import com.example.storemanagement.repository.dto.PurchaseOrderFilter;
 import org.springframework.data.jpa.domain.Specification;
@@ -13,6 +15,7 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PurchaseOrderServiceImpl implements PurchaseOrderService {
@@ -34,8 +37,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     public PurchaseOrder generatePurchaseOrder(PurchaseOrderDto purchaseOrderDto) {
         Staff createdBy = staffService.searchById(purchaseOrderDto.getStaffId());
         Store store = storeService.searchById(purchaseOrderDto.getStoreId());
-        ItemFilter itemFilter = null;
-        List<Item> item = itemService.search(itemFilter);
+        List<Item> item = purchaseOrderDto.getItemIds().stream().map(itemService::searchById).collect(Collectors.toList());
         PurchaseOrder purchaseOrder = new PurchaseOrder(new Date(), createdBy, store, item, purchaseOrderDto.getAmount());
         return purchaseOrderRepository.save(purchaseOrder);
     }

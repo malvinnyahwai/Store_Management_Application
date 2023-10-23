@@ -1,28 +1,31 @@
 package com.example.storemanagement.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Category {
+public class Supplier {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(nullable = false)
     private String name;
 
-    public Category() {
+    public Supplier() {
 
     }
 
-    public Category(String name) {
+    public Supplier(Long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -32,5 +35,4 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-
 }

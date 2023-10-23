@@ -1,7 +1,6 @@
 package com.example.storemanagement.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Store {
@@ -13,18 +12,15 @@ public class Store {
     @Embedded
     private Address address;
     private Boolean active;
-    @OneToMany
-    private List<Staff> staff;
 
     public Store() {
 
     }
 
-    public Store(String name, Address address, Boolean active, List<Staff> staff) {
+    public Store(String name, Address address, Boolean active) {
         this.name = name;
         this.address = address;
         this.active = active;
-        this.staff = staff;
     }
 
     public Long getId() {
@@ -55,11 +51,4 @@ public class Store {
         this.active = active;
     }
 
-    public List<Staff> getStaff() {
-        return staff;
-    }
-
-    public void setStaff(List<Staff> staff) {
-        this.staff = staff;
-    }
 }

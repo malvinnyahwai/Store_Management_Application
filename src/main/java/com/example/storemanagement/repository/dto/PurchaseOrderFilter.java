@@ -1,9 +1,5 @@
 package com.example.storemanagement.repository.dto;
 
-import com.example.storemanagement.entity.Staff;
-import com.example.storemanagement.entity.Store;
-
-import javax.persistence.OneToOne;
 import java.util.Date;
 
 public class PurchaseOrderFilter {

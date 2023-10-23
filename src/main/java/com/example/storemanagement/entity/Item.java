@@ -1,7 +1,6 @@
 package com.example.storemanagement.entity;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Item {
@@ -12,25 +11,30 @@ public class Item {
     private String name;
     @ManyToOne
     private Category category;
-    @Column(name = "bar_code")
-    private String barCode;
-    @Column(name = "sell_by_date")
-    private Date sellByDate;
+    private String description;
     private Double price;
     @OneToOne
     private Store store;
+    @Column(name = "initial_quantity")
+    private Long initialQuantity;
+    private Long quantity;
+    @ManyToOne
+    private Supplier supplier;
 
     public Item() {
 
     }
 
-    public Item(String name, Category category, String barCode, Date sellByDate, Double price, Store store) {
+    public Item(String name, Category category, String description, Double price, Store store, Long initialQuantity,
+                Long quantity, Supplier supplier) {
         this.name = name;
         this.category = category;
-        this.barCode = barCode;
-        this.sellByDate = sellByDate;
+        this.description = description;
         this.price = price;
         this.store = store;
+        this.initialQuantity = initialQuantity;
+        this.quantity = quantity;
+        this.supplier = supplier;
     }
 
     public Long getId() {
@@ -53,20 +57,12 @@ public class Item {
         this.category = category;
     }
 
-    public String getBarCode() {
-        return barCode;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
-    }
-
-    public Date getSellByDate() {
-        return sellByDate;
-    }
-
-    public void setSellByDate(Date sellByDate) {
-        this.sellByDate = sellByDate;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPrice() {
@@ -83,5 +79,29 @@ public class Item {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public Long getInitialQuantity() {
+        return initialQuantity;
+    }
+
+    public void setInitialQuantity(Long initialQuantity) {
+        this.initialQuantity = initialQuantity;
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 }

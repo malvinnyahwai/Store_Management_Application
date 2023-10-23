@@ -5,6 +5,7 @@ import com.example.storemanagement.repository.dto.PurchaseOrderDto;
 import com.example.storemanagement.repository.dto.PurchaseOrderFilter;
 import com.example.storemanagement.service.PurchaseOrderService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class PurchaseOrderAPI {
     }
 
     @PostMapping(value = "generate")
+    @PreAuthorize("hasRole('admin') or hasRole('store_manager')")
     public Response<PurchaseOrder> create(@RequestBody PurchaseOrderDto purchaseOrderDto) {
         PurchaseOrder purchaseOrder = purchaseOrderService.generatePurchaseOrder(purchaseOrderDto);
         return new Response<>(HttpStatus.OK, purchaseOrder, "created");

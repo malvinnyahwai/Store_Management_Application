@@ -1,31 +1,17 @@
 package com.example.storemanagement.repository.dto;
 
-import com.sun.istack.NotNull;
-
-import java.util.Date;
-
 public class ItemDto {
     private Long id;
-    @NotNull
     private String name;
-    @NotNull
     private Long categoryId;
-    private String barCode;
-    private Date sellByDate;
+    private String description;
     private Double price;
     private Long storeId;
+    private Long initialQuantity;
+    private Long quantity;
 
     public ItemDto() {
 
-    }
-
-    public ItemDto(String name, Long categoryId, String barCode, Date sellByDate, Double price, Long storeId) {
-        this.name = name;
-        this.categoryId = categoryId;
-        this.barCode = barCode;
-        this.sellByDate = sellByDate;
-        this.price = price;
-        this.storeId = storeId;
     }
 
     public Long getId() {
@@ -52,20 +38,12 @@ public class ItemDto {
         this.categoryId = categoryId;
     }
 
-    public String getBarCode() {
-        return barCode;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
-    }
-
-    public Date getSellByDate() {
-        return sellByDate;
-    }
-
-    public void setSellByDate(Date sellByDate) {
-        this.sellByDate = sellByDate;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPrice() {
@@ -82,5 +60,21 @@ public class ItemDto {
 
     public void setStoreId(Long storeId) {
         this.storeId = storeId;
+    }
+
+    public Long getInitialQuantity() {
+        return initialQuantity;
+    }
+
+    public void setInitialQuantity(Long initialQuantity) {
+        this.initialQuantity = initialQuantity;
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 }

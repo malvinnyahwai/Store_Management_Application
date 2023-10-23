@@ -1,32 +1,25 @@
 package com.example.storemanagement.service;
 
 import com.example.storemanagement.entity.Category;
-import com.example.storemanagement.entity.Item;
 import com.example.storemanagement.repository.CategoryRepository;
 import com.example.storemanagement.repository.dto.CategoryDto;
 import com.example.storemanagement.repository.dto.CategoryFilter;
-import com.example.storemanagement.repository.dto.ItemFilter;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private final ItemService itemService;
     private final CategoryRepository categoryRepository;
 
-    public CategoryServiceImpl(ItemService itemService, CategoryRepository categoryRepository) {
-        this.itemService = itemService;
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
     @Override
     public Category create(CategoryDto categoryDto) {
-        ItemFilter itemFilter = null;
-        List<Item> itemList = itemService.search(itemFilter);
-        Category category = new Category(categoryDto.getName(), itemList);
+        Category category = new Category(categoryDto.getName());
         return categoryRepository.save(category);
     }
 
@@ -48,8 +41,6 @@ public class CategoryServiceImpl implements CategoryService {
     public Category update(CategoryDto categoryDto, Long id) {
         Category category = searchById(id);
         category.setName(category.getName());
-        List<Item> items = categoryDto.getItemIds().stream().map(itemService::searchById).collect(Collectors.toList());
-        category.setItem(items);
         return categoryRepository.save(category);
     }
 

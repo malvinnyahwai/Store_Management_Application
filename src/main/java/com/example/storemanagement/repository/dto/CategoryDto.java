@@ -7,15 +7,13 @@ import java.util.List;
 public class CategoryDto {
     @NotNull
     private String name;
-    private List<Long> itemIds;
 
     public CategoryDto() {
 
     }
 
-    public CategoryDto(String name, List<Long> itemIds) {
+    public CategoryDto(String name) {
         this.name = name;
-        this.itemIds = itemIds;
     }
 
     public String getName() {
@@ -26,11 +24,4 @@ public class CategoryDto {
         this.name = name;
     }
 
-    public List<Long> getItemIds() {
-        return itemIds;
-    }
-
-    public void setItemIds(List<Long> itemIds) {
-        this.itemIds = itemIds;
-    }
 }

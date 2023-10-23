@@ -6,8 +6,6 @@ import java.util.List;
 
 public class PurchaseOrderDto {
     @NotNull
-    private Long staffId;
-    @NotNull
     private Long storeId;
     @NotNull
     private List<Long> itemIds;
@@ -17,19 +15,10 @@ public class PurchaseOrderDto {
 
     }
 
-    public PurchaseOrderDto(Long staffId, Long storeId, List<Long> itemIds, Double amount) {
-        this.staffId = staffId;
+    public PurchaseOrderDto(Long storeId, List<Long> itemIds, Double amount) {
         this.storeId = storeId;
         this.itemIds = itemIds;
         this.amount = amount;
-    }
-
-    public Long getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(Long staffId) {
-        this.staffId = staffId;
     }
 
     public Long getStoreId() {
